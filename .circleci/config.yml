@@ -48,5 +48,6 @@ workflows:
     jobs:
       - say-hello
       - print-hello
+      - print-project-secret
       - print-world:
           requires: [print-hello]
