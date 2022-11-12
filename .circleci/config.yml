@@ -33,6 +33,14 @@ jobs:
       - run:
           name: "Print World"
           command: echo world
+  print-project-secret:
+    docker: 
+      - image: circleci/node
+    steps:
+      - checkout
+      - run:
+          name: "Print Secret"
+          command: echo $SECRET        
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
