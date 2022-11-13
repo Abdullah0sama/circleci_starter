@@ -7,7 +7,7 @@ version: 2.1
 jobs:
   save-hello-world:
     docker:
-      - image: docker/alpine
+      - image: alpine
     steps:
       - checkout
       - run:
@@ -19,7 +19,7 @@ jobs:
             - "hello.txt"
   print-hello-world:
     docker:
-      - image: docker/alpine
+      - image: alpine
     steps:
       - checkout
       - attach_workspace:
