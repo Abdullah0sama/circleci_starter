@@ -12,9 +12,9 @@ jobs:
       - checkout
       - run:
           name: "Save Hello world"
-          command: echo HelloWorld > hello.txt
+          command: echo HelloWorld > ~/hello.txt
       - persist_to_workspace:
-          root: /
+          root: ~/
           paths:
             - "hello.txt"
   print-hello-world:
@@ -23,10 +23,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/hello.txt
+          at: ~/hello.txt
       - run:
           name: "Print hello world"
-          command: cat hello.txt
+          command: cat ~/hello.txt
           
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
