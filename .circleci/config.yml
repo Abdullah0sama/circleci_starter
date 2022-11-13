@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/hello.txt
+          at: ~/
       - run:
           name: "Print hello world"
           command: cat ~/hello.txt
