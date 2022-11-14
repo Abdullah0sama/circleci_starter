@@ -8,43 +8,22 @@ commands:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  try-fail:
+    docker:
+        - image: alpine
+    steps:
+      - run:
+          name: "Something will fail"
+          command: return 1
+      - run:
+          name: "Failure"
+          command: echo failure
+          when: on_fail
   
-  use-command:
-    docker: 
-      - image: alpine
-    steps:
-      - checkout
-      - print-pipeline-id
-
-  save-hello-world:
-    docker:
-      - image: alpine
-    steps:
-      - checkout
-      - run:
-          name: "Save Hello world"
-          command: echo HelloWorld > ~/hello.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - "hello.txt"
-  print-hello-world:
-    docker:
-      - image: alpine
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: "Print hello world"
-          command: cat ~/hello.txt
           
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - save-hello-world
-      - use-command
-      - print-hello-world:
-          requires: [save-hello-world]
+      - try-fail
